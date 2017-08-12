@@ -1,0 +1,15 @@
+{
+  "name": "flowlist",
+  "version": "0.1.0",
+  "description": "A save-it-for-sooner list populated by your friends",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "oscarb",
+  "license": "ISC",
+  "dependencies": {
+    "Parse-Server-phone-number-auth": "^1.0.2",
+    "dotenv": "^4.0.0"
+  }
+}
