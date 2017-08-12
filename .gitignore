@@ -5,4 +5,4 @@
 */node_modules/
 .parse.local
 .parse.project
-*.env
+/cloud/config/facebook-app.js

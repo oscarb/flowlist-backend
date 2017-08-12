@@ -1,12 +1,18 @@
 'use strict';
 
 const https = require('https');
-require('dotenv').config();
-
-console.log(JSON.stringify(process.env));
+const facebookConfig = require('./config/facebook-app');
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
+
+Parse.Cloud.define("test", function(request, response) {
+
+  response.success(facebookConfig);
+});
+
+
+
 Parse.Cloud.define("requestAccessToken", function(request, response) {
   let authorizationCode = request.params.authorizationCode;
   console.log("Authorization code: " + authorizationCode);
@@ -18,8 +24,8 @@ Parse.Cloud.define("requestAccessToken", function(request, response) {
 
 
 function getAccessToken(authorizationCode) {
-  const facebookAppId = process.env.FACEBOOK_APP_ID;
-  const appSecret = process.env.FACEBOOK_APP_SECRET;
+  const facebookAppId = facebookConfig.APP_ID;
+  const appSecret = facebookConfig.APP_SECRET;
   const url = "https://graph.accountkit.com/v1.2/access_token?grant_type=authorization_code&code=" + authorizationCode + "&access_token=AA|" + facebookAppId + "|" + appSecret;
 
   console.log("Getting URL: " + url);
