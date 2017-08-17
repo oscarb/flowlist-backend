@@ -80,31 +80,32 @@ const loginUser = function(account) {
       .then(user => {
       if(user) {
         console.log("USER EXISTS IN SYSTEM " + user.get('username'));
-        return resolve(user);
         // Found user, try to get session
+        const randomPassword = getRandomPassword(32);
+        user.setPassword(randomPassword);
+        user.save(null, {useMasterKey: true})
+          .then(user => Parse.User.logIn(user.get("username"), randomPassword))
+          .then(user => resolve(user))
+          .catch(error => reject(error));
+
       } else {
         // No user found, sign up user
-        return signUpUser(account);
+        console.log("SIGN UP USER");
+
+        let user = new Parse.User();
+        user.set("accountKitId", account.id);
+        user.set("phoneNumber", account.phone.number);
+        user.set("phoneCountryPrefix", account.phone.country_prefix);
+        user.set("username", getRandomUsername());
+        user.set("password", getRandomPassword(32));
+
+        resolve(user.signUp(null));
 
       }
     }).catch(error => reject(error));
   })
 };
 
-const signUpUser(account) = function(account) {
-  return new Promise((resolve, reject) => {
-    console.log("SIGN UP USER");
-
-    let user = new Parse.User();
-    user.set("accountKitId", account.id);
-    user.set("phoneNumber", account.phone.number);
-    user.set("phoneCountryPrefix", account.phone.country_prefix);
-    user.set("username", getRandomUsername());
-    user.set("password", getRandomPassword(32));
-
-    return user.signUp(null);
-  })
-};
 
 function getAppSecretProof(token) {
   return crypto.createHmac('sha256', facebookConfig.APP_SECRET)
