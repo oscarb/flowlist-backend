@@ -113,22 +113,8 @@ function getAppSecretProof(token) {
     .digest('hex');
 }
 
-// https://stackoverflow.com/questions/30309496/multiple-queries-with-parse-cloud-code-using-promises
-// https://stackoverflow.com/questions/31747100/parse-cloud-code-chain-promises
-// https://stackoverflow.com/questions/18229041/use-own-promises-in-parse-cloud-code
-// https://github.com/petkaantonov/bluebird/wiki/Promise-anti-patterns
-// https://gist.github.com/domenic/3889970
 
-// https://stackoverflow.com/questions/24582031/parse-com-how-to-login-as-a-user-without-knowing-their-password
-// http://blog.parse.com/announcements/bring-your-own-login/
-// https://stackoverflow.com/questions/28240493/parse-create-save-new-user-without-signup
-// https://stackoverflow.com/questions/29489008/parse-why-does-user-getsessiontoken-return-undefined
-// https://stackoverflow.com/questions/37754290/parse-server-user-getsessiontoken-not-defined
-
-
-
-
-// https://www.tomas-dvorak.cz/posts/nodejs-request-without-dependencies/
+// See https://www.tomas-dvorak.cz/posts/nodejs-request-without-dependencies/
 const get = function(url) {
   // return new pending promise
   return new Promise((resolve, reject) => {
